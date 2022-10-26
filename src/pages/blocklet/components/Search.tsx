@@ -9,7 +9,7 @@ const Search = memo((props: {
     value={props.value}
     size='small'
     fullWidth
-    label='Block hash'
+    label='Blocklet hash'
     variant='outlined'
     onChange={(e) => props.onChange(e.target.value)} />;
 });

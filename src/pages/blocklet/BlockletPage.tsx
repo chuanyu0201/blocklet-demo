@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import Search from './components/Search';
 import { useQuery } from 'react-query';
 import Transactions, { TransactionItemProps } from './components/Transactions';
@@ -32,10 +32,13 @@ const BlockletPage = () => {
   const { data } = useQuery(['blockListQuery', hash], () => fetchBlock(hash), {
     enabled: !!hash,
   });
+  const onChange = useCallback((value: string) => {
+    setHash(value);
+  }, []);
 
   return <div className='sm:my-12 my-8 mx-4 sm:mx-32'>
-    <Search value={hash} onChange={(value) => setHash(value)} />
-    {hash === '' && <p className='mt-2'> Please enter a bitcoin block hash</p>}
+    <Search value={hash} onChange={onChange} />
+    {hash === '' && <p className='mt-2'> Please enter a bitcoin blocklet hash</p>}
     {data?.error ? <p className='mt-2 text-rose-500'>{data?.message}</p> :
       <div className='grid grid-cols-1 sm:grid-cols-2 gap-4 mt-3'>
         <BlockletDetail blocklet={data} />

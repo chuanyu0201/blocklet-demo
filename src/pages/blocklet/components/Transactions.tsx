@@ -17,7 +17,7 @@ const Transactions = memo((props: { transactions?: TransactionItemProps[] }) => 
       return []
     }
     return props.transactions?.slice(page * pageSize, (page + 1) * pageSize);
-  }, []);
+  }, [props.transactions]);
 
   if (props.transactions == null) {
     return null;
