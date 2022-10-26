@@ -13,8 +13,11 @@ export type TransactionItemProps = {
 const Transactions = memo((props: { transactions?: TransactionItemProps[] }) => {
   const [page, setPage] = useState(0);
   const showTransactions = useMemo(() => {
-    return props.transactions?.slice(page * pageSize, (page + 1) * pageSize) ?? [];
-  }, []);
+    if(props.transactions == null) {
+      return []
+    }
+    return props.transactions?.slice(page * pageSize, (page + 1) * pageSize);
+  }, [props.transactions]);
 
   if (props.transactions == null) {
     return null;
