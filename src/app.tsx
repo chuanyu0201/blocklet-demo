@@ -2,7 +2,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import { QueryClientProvider, QueryClient } from 'react-query';
 import './app.css';
 import Home from './pages/home';
-import BlockPage from './pages/block/BlockPage';
+import BlockletPage from './pages/blocklet/BlockletPage';
 
 function App() {
   const client = new QueryClient();
@@ -11,7 +11,7 @@ function App() {
       <QueryClientProvider client={client}>
         <Routes>
           <Route path='/' element={<Home />} />
-          <Route path='/block-page' element={<BlockPage />} />
+          <Route path='/blocklet-page' element={<BlockletPage />} />
           <Route path='/home' element={<Home />} />
           <Route path='*' element={<Navigate to='/' />} />
         </Routes>
