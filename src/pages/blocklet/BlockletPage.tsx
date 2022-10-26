@@ -29,7 +29,7 @@ const fetchBlock = (hash: string): Promise<BlockLet> =>
 
 const BlockletPage = () => {
   const [hash, setHash] = useState('');
-  const { data } = useQuery(['blockListQuery', hash], () => fetchBlock(hash), {
+  const { data, isLoading } = useQuery(['blockListQuery', hash], () => fetchBlock(hash), {
     enabled: !!hash,
   });
   const onChange = useCallback((value: string) => {
@@ -39,6 +39,7 @@ const BlockletPage = () => {
   return <div className='sm:my-12 my-8 mx-4 sm:mx-32'>
     <Search value={hash} onChange={onChange} />
     {hash === '' && <p className='mt-2'> Please enter a bitcoin blocklet hash</p>}
+    {isLoading && <p className='mt-4 text-xl text-center'>loading...</p>}
     {data?.error ? <p className='mt-2 text-rose-500'>{data?.message}</p> :
       <div className='grid grid-cols-1 sm:grid-cols-2 gap-4 mt-3'>
         <BlockletDetail blocklet={data} />
